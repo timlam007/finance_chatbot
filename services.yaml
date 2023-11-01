@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: finchat
+spec:
+  selector:
+    app: finchat
+  ports:
+  - protocol: TCP
+    port: 8501
+    targetPort: 8501
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: finchat
+spec:
+  to:
+    kind: Service
+    name: finchat
+  port:
+    targetPort: 8501

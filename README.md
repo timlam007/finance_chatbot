@@ -29,7 +29,7 @@ Streamlit has been chosen as the front-end tool due to its simplicity and effici
 
 This chatbot document and data retrieval System simplifies and enhances the process of summarizing and retrieving information from company-specific knowledge sources while maintaining the context of the chat, ensuring accuracy and reliability in knowledge extraction.
 
-![Architecture_Diagram](https://github.com/okoliechykwuka/finance_chatbot/blob/main/img/finapp.drawio.png)
+![Architecture_Diagram](https://github.com/timlam007/finance_chatbot/blob/main/img/finapp.drawio.png)
 
 
 ## Breakdown of The Chatbot Retrieval System for the Document(PDF, DOC, .TXT)
@@ -61,7 +61,7 @@ Next, we can start constructing the answer to a question/query of interest:
 
 you will want to ensure that the answers returned by LLM fall into expected boundaries, e.g. if there is no data in the retrieved context that could be used make sure that no made-up answer is provided.
 
-![Document retreiver](https://github.com/okoliechykwuka/finance_chatbot/blob/main/img/lll_chatbot%20flowchart.jpeg)
+![Document retreiver](https://github.com/timlam007/finance_chatbot/blob/main/img/lll_chatbot%20flowchart.jpeg)
 
 
 ## Breakdown of CSV Agent and SQL Agents
@@ -90,13 +90,22 @@ streamlit run app.py
 
 ### Steps to run the app via docker
 
-1. pull docker image from the hub  `docker pull chukypedro15/finchat:1.0`   https://hub.docker.com/repository/docker/chukypedro15/finchat/general
+1. pull docker image from the hub  `docker pull timlam007/finchat:1.0`   `https://hub.docker.com/repository/docker/timlam007/finchat/general`
 
 2. Run  `docker run -d -p 8501:8501 finance_chatbot-app` and navigate to `http://localhost:8501`
 
 3. You can navigate to the localhost endpoint and interact with the application.
 
 4. User `host.docker.internal` as the database Host in the streamlit UserInterface
+
+
+### Steps to deploy via OpenShift
+
+1. `oc apply -f deployment.yaml'
+2. `oc apply -f services.yaml`
+3. `oc get route finchat`
+
+
 
 
 ```
