@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: deploy-finchat-task
+spec:
+  params:
+  - name: deployment-manifest
+    description: The deployment manifest for finchat
+    type: string
+  steps:
+  - name: oc-apply-deployment
+    image: registry.redhat.io/openshift4/ose-cli:v4.7
+    script: |
+      #!/bin/sh
+      echo "$(params.deployment-manifest)" | oc apply -f -

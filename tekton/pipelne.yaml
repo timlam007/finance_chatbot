@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: deploy-finchat-pipeline
+spec:
+  params:
+  - name: manifest
+    description: The deployment manifest for finchat
+    type: string
+  tasks:
+  - name: deploy-finchat
+    taskRef:
+      name: deploy-finchat-task
+    params:
+    - name: manifest
+      value: $(params.manifest)

@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: deploy-finchat-route-task
+spec:
+  params:
+  - name: route-manifest
+    description: The deployment manifest for the finchat route
+    type: string
+  steps:
+  - name: oc-apply-route
+    image: registry.redhat.io/openshift4/ose-cli:v4.7
+    script: |
+      #!/bin/sh
+      echo "$(params.route-manifest)" | oc apply -f -

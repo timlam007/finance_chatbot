@@ -1,0 +1,49 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: deploy-finchat-pipeline-run
+spec:
+  serviceAccountName: pipeline
+  pipelineRef:
+    name: deploy-finchat-pipeline
+  params:
+  - name: manifest
+    value: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        labels:
+          app: finchat
+          app.kubernetes.io/component: finchat
+          app.kubernetes.io/instance: finchat
+          app.kubernetes.io/part-of: finchat
+          app.openshift.io/runtime: python
+        name: finchat
+      spec:
+        replicas: 1
+        strategy:
+          type: Recreate
+        selector:
+          matchLabels:
+            app: finchat
+        template:
+          metadata:
+            labels:
+              app: finchat
+              deploymentconfig: finchat
+          spec:
+            containers:
+            - image: timlam007/finchat:1.0
+              imagePullPolicy: Always
+              name: finchat
+              ports:
+              - containerPort: 8501
+              livenessProbe:
+                httpGet:
+                  path: /_stcore/health
+                  port: 8501
+              readinessProbe:
+                httpGet:
+                  path: /_stcore/health
+                  port: 8501
+              resources: {}

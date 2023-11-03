@@ -22,7 +22,7 @@ spec:
         deploymentconfig: finchat
     spec:
       containers:
-      - image: timlam007/finchat:latest
+      - image: timlam007/finchat:1.0
         imagePullPolicy: Always
         name: finchat
         ports:
