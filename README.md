@@ -99,13 +99,24 @@ streamlit run app.py
 4. User `host.docker.internal` as the database Host in the streamlit UserInterface
 
 
-### Steps to deploy via OpenShift
+### Steps to deploy via OpenShift Manually
 
-1. `oc apply -f deployment.yaml'
+1. `oc apply -f deployment.yaml`
 2. `oc apply -f services.yaml`
 3. `oc get route finchat`
+4. `http://[route output]`
 
+### Steps to deploy via OpenShift Pipelines
 
+1. `oc apply -f deploy-finchat-task.yaml`
+2. `oc apply -f deploy-finchat-pipeline.yaml`
+3. `oc apply -f deploy-finchat-pipeline-run.yaml`
+4. `oc apply -f deploy-finchat-service-task.yaml`
+5. `oc apply -f deploy-finchat-route-task.yaml`
+6. `tkn  pipelinerun  list`
+7. `tkn pipelinerun describe deploy-finchat-pipeline-run`
+8. `oc get route finchat`
+9. `http://[route output]`
 
 
 ```
